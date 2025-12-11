@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Check if user is already logged in
 if (isset($_SESSION['user_id'])) {
     header("Location: ../dashboard.php");
     exit();
 }
 
-// Get error and success messages from session
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
 $success = isset($_SESSION['success']) ? $_SESSION['success'] : '';
 unset($_SESSION['error']);

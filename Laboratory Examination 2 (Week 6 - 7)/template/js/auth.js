@@ -1,4 +1,3 @@
-// Validation Helper Functions
 const validators = {
     email: (value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -10,7 +9,6 @@ const validators = {
     },
     
     phone: (value) => {
-        // Accepts various phone formats including +63, 09, etc.
         const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/;
         return phoneRegex.test(value) && value.length >= 10;
     },
@@ -24,7 +22,6 @@ const validators = {
     }
 };
 
-// Show error message for a field
 function showError(fieldId, message) {
     const errorElement = document.getElementById(fieldId + 'Error');
     const inputElement = document.getElementById(fieldId);
@@ -39,7 +36,6 @@ function showError(fieldId, message) {
     }
 }
 
-// Clear error message for a field
 function clearError(fieldId) {
     const errorElement = document.getElementById(fieldId + 'Error');
     const inputElement = document.getElementById(fieldId);
@@ -54,7 +50,6 @@ function clearError(fieldId) {
     }
 }
 
-// Validate individual field
 function validateField(fieldId, validator, errorMessage) {
     const inputElement = document.getElementById(fieldId);
     if (!inputElement) return true;
@@ -75,16 +70,13 @@ function validateField(fieldId, validator, errorMessage) {
     return true;
 }
 
-// Login Form Validation
 function validateLoginForm() {
     let isValid = true;
     
-    // Validate email
     if (!validateField('email', validators.email, 'Please enter a valid email address')) {
         isValid = false;
     }
     
-    // Validate password
     if (!validateField('password', validators.password, 'Password must be at least 6 characters')) {
         isValid = false;
     }
@@ -92,26 +84,21 @@ function validateLoginForm() {
     return isValid;
 }
 
-// Registration Form Validation
 function validateRegisterForm() {
     let isValid = true;
     
-    // Validate first name
     if (!validateField('firstName', validators.name, 'First name must be at least 2 characters')) {
         isValid = false;
     }
     
-    // Validate last name
     if (!validateField('lastName', validators.name, 'Last name must be at least 2 characters')) {
         isValid = false;
     }
     
-    // Validate email
     if (!validateField('email', validators.email, 'Please enter a valid email address')) {
         isValid = false;
     }
     
-    // Validate password
     if (!validateField('password', validators.password, 'Password must be at least 6 characters')) {
         isValid = false;
     }
@@ -119,7 +106,6 @@ function validateRegisterForm() {
     return isValid;
 }
 
-// Toggle Password Visibility
 function setupPasswordToggle() {
     const toggleButtons = document.querySelectorAll('.toggle-password');
     
@@ -148,7 +134,6 @@ function setupPasswordToggle() {
     });
 }
 
-// Real-time validation on input
 function setupRealtimeValidation() {
     const inputs = document.querySelectorAll('input[required]');
     
@@ -162,7 +147,6 @@ function setupRealtimeValidation() {
                 return;
             }
             
-            // Field-specific validation
             switch(fieldId) {
                 case 'email':
                     validateField(fieldId, validators.email, 'Please enter a valid email address');
@@ -185,7 +169,6 @@ function setupRealtimeValidation() {
     });
 }
 
-// Auto-hide messages after 5 seconds
 function setupAutoHideMessages() {
     const messages = document.querySelectorAll('.error-message, .success-message');
     
@@ -200,48 +183,38 @@ function setupAutoHideMessages() {
     });
 }
 
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Setup password toggle
     setupPasswordToggle();
     
-    // Setup real-time validation
     setupRealtimeValidation();
     
-    // Auto-hide messages
     setupAutoHideMessages();
     
-    // Login form submission
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             if (validateLoginForm()) {
-                // Add loading state
                 const submitButton = this.querySelector('.btn-submit');
                 submitButton.classList.add('loading');
                 submitButton.disabled = true;
                 
-                // Submit form
                 this.submit();
             }
         });
     }
     
-    // Register form submission
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             if (validateRegisterForm()) {
-                // Add loading state
                 const submitButton = this.querySelector('.btn-submit');
                 submitButton.classList.add('loading');
                 submitButton.disabled = true;
                 
-                // Submit form
                 this.submit();
             }
         });

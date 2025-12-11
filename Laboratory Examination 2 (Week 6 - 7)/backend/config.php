@@ -1,28 +1,18 @@
 <?php
-/**
- * Database Configuration File
- * Using SQLite for simple, file-based database
- */
 
-// SQLite database file path
 define('DB_PATH', __DIR__ . '/../database/abstrackgym.db');
 
-// Create database connection
 function getDBConnection() {
     try {
-        // Ensure database directory exists
         $dbDir = dirname(DB_PATH);
         if (!file_exists($dbDir)) {
             mkdir($dbDir, 0755, true);
         }
         
-        // Create SQLite connection
         $conn = new PDO('sqlite:' . DB_PATH);
         
-        // Set error mode to exceptions
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Enable foreign keys
         $conn->exec('PRAGMA foreign_keys = ON;');
         
         return $conn;
@@ -32,7 +22,6 @@ function getDBConnection() {
     }
 }
 
-// Create users table
 function createUsersTable() {
     try {
         $conn = getDBConnection();
@@ -51,7 +40,6 @@ function createUsersTable() {
         
         $conn->exec($sql);
         
-        // Create index on email for faster lookups
         $conn->exec("CREATE INDEX IF NOT EXISTS idx_email ON users(email)");
         $conn->exec("CREATE INDEX IF NOT EXISTS idx_status ON users(status)");
         

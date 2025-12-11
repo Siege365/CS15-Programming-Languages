@@ -17,3 +17,9 @@ troy = Dog("Troy", 21)
 troy.bark()
 troy.celebrateBirthday()
 print(troy.getInfo())
+
+program ::= statement*
+statement ::= simple_stmt | compound_stmt
+simple_stmt ::= small_stmt (';' small_stmt)* [';']
+compound_stmt ::= if_stmt | while_stmt | for_stmt | def_stmt
+expression ::= or_test ['if' or_test 'else' expression]

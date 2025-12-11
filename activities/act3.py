@@ -21,3 +21,6 @@ strength = int(input("Enter strength value: "))
 
 warrior = Warrior(name, health, strength)
 warrior.display_stats()
+
+
+

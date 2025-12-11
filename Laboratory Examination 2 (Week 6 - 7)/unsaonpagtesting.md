@@ -1,0 +1,4 @@
+step 1: adto sa terminal then type php -S localhost:8000 -t .
+step 2: in case ni error, mao ning routes niya: http://localhost:8000/template/login.php, http://localhost:8000/template/register.php, http://localhost:8000/dashboard.php.
+
+ang sql kay sqlite
